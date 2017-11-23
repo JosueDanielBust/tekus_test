@@ -12,15 +12,17 @@ function downloadSingleFile(file) {
     return new Promise( function(resolve, reject) {
         fs.stat(file, function(error, stats) { 
             if(error){
-                
-                let fileStream = fs.createWriteStream(file);
-                request('http://cdn.tekus.co/Media/' + file).on('response', function(data) {
-                    console.log( data.headers[ 'content-length' ] );
-                }).pipe(fileStream).on('finish', function() {
+                progress(request('http://cdn.tekus.co/Media/' + file), {
+                    throttle: 1000,
+                    delay: 0
+                })
+                .on('progress', function (state) { console.log('progress', state.percent); })
+                .on('error', function (err) { throw error; })
+                .on('end', function () {
                     console.log(file + " downloaded");
                     return resolve('');
-                });
-
+                })
+                .pipe(fs.createWriteStream(file));
             } else {
                 console.log(file + " exists");
                 return resolve('');
