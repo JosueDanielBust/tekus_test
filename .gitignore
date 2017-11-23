@@ -1,0 +1,4 @@
+*.mp4
+*.jpg
+Media/
+node_modules/

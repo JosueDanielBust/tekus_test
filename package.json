@@ -1,0 +1,16 @@
+{
+  "name": "tekus",
+  "version": "1.0.0",
+  "description": "Development test",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "JosueDanielBust",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.83.0",
+    "request-progress": "^3.0.0"
+  }
+}
