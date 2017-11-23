@@ -6,11 +6,14 @@ let fs = require('fs');
 let request = require('request');
 var progress = require('request-progress');
 
+// This array is an Array of Arrays object
+// Each element of the array has a name and his play time
+// [filename, time]
 let media = [['Arkbox.mp4', 0], ['Cronometro.mp4', 60], ['Tekus_BG1.jpg', 5], ['Tekus_BG2.jpg', 10]]
 
 function downloadSingleFile(file) {
     return new Promise( function(resolve, reject) {
-        fs.stat(file, function(error, stats) { 
+        fs.stat('./Media/' + file, function(error, stats) { 
             if(error){
                 progress(request('http://cdn.tekus.co/Media/' + file), {
                     throttle: 1000,
@@ -22,7 +25,7 @@ function downloadSingleFile(file) {
                     console.log(file + " downloaded");
                     return resolve('');
                 })
-                .pipe(fs.createWriteStream(file));
+                .pipe(fs.createWriteStream('./Media/' + file));
             } else {
                 console.log(file + " exists");
                 return resolve('');
@@ -30,7 +33,6 @@ function downloadSingleFile(file) {
         });
     });
 }
-
 
 function downloadFiles(files) {
     return new Promise( function(resolve, reject) {
