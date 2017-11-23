@@ -1,2 +1,3 @@
-Media/
+Media/*.mp4
+Media/*.jpg
 node_modules/
