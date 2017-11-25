@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/video-js.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>JosueDanielBust - Tekus Application</title>
+</head>
+<body>
+    <video id="videoPlayer" class="video-js vjs-default-skin" controls></video>
+    <script src="/js/video.min.js"></script>
+    <script src="/js/videojs.cuepoints.js"></script>
+    <script>
+        // This array is an Array of Arrays object
+        // Each element of the array has a name and his play time on seconds
+        // [filename, time]
+        var media = [['Tekus_BG1.jpg', 5], ['Arkbox.mp4', 0], ['Tekus_BG2.jpg', 10], ['Cronometro.mp4', 60]];
+
+        // Control flag for scenes
+        // Every scene is a pair of image and video
+        var scene = 1;
+        
+        var player = videojs('videoPlayer', { inactivityTimeout: 0 });
+
+        function createPlayer(startVideoTime, endVideoTime, srcVideo, srcPoster, posterTime) {
+            player.ready(function() {
+                player.isFullscreen(true);
+
+                this.cuepoints();
+                this.addCuepoint({
+                    namespace: "logger",
+                    start: startVideoTime,
+                    end: endVideoTime,
+                    onEnd: function(params){
+                        this.destroyCuepoints;
+                        if ( scene == 1 ) { scene = 2; secondScene(); }
+                        else { scene = 1; firstScene(); }
+                    },
+                    params: {error: false}
+                });
+
+                player.poster('./Media/' + srcPoster);
+                player.src('./Media/' + srcVideo)
+                setTimeout(function(){
+                    player.play();
+                }, posterTime * 1000);
+            });
+        }
+
+        function firstScene() {
+            // ['Tekus_BG1.jpg', 5], ['Arkbox.mp4', 0]
+            createPlayer(0, 90, media[1][0], media[0][0], media[0][1]);
+        }
+        function secondScene(){
+            // ['Tekus_BG2.jpg', 10], ['Cronometro.mp4', 60]
+            createPlayer(0, media[3][1], media[3][0], media[2][0], media[2][1]);
+        }
+
+        firstScene();
+    </script>
+</body>
+</html>

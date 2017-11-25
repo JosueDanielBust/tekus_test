@@ -1,3 +1,9 @@
-Media/*.mp4
-Media/*.jpg
+public/Media/*.mp4
+public/Media/*.jpg
 node_modules/
+.DS_Store
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json

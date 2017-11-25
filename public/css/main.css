@@ -1,0 +1,17 @@
+body {
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+}
+video#videoPlayer {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.videoPlayer-dimensions {
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+}

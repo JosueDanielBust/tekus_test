@@ -8,9 +8,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "JosueDanielBust",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "request": "^2.83.0",
-    "request-progress": "^3.0.0"
+    "request-progress": "^3.0.0",
+    "serve-static": "^1.13.1"
   }
 }
